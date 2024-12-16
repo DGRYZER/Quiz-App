@@ -1,0 +1,46 @@
+<!--
+  @description       : 
+  @author            : DEBAJYOTI GHOSH
+  @group             : 
+  @last modified on  : 12-16-2024
+  @last modified by  : DEBAJYOTI GHOSH
+-->
+<template>
+  <lightning-card title="Quiz App">
+    <div class="slds-m-around_medium">
+      <form>
+        <template for:each={myQuestions} for:item="questions">
+          <div key={questions.id} class="slds-m-bottom_medium">
+            <strong>{questions.id}. {questions.question}</strong>
+            <div class="slds-grid slds-gutters slds-p-top_medium">
+              <div class="slds-col">
+                <input type="radio" name={questions.id} value="a" onchange={changeHandler} />
+                {questions.answers.a}
+              </div>
+              <div class="slds-col">
+                <input type="radio" name={questions.id} value="b" onchange={changeHandler} />
+                {questions.answers.b}
+              </div>
+              <div class="slds-col">
+                <input type="radio" name={questions.id} value="c" onchange={changeHandler} />
+                {questions.answers.c}
+              </div>
+            </div>
+          </div>
+        </template>
+        <lightning-button variant="success" type="submit" label="Submit" title="Submit Quiz" onclick={submitHandler}
+          disabled={allNotSelected} class="slds-m-left_x-small"></lightning-button>
+
+        <lightning-button variant="brand" type="reset" label="reset" title="Reset Quiz" onclick={resetHandler}
+          class="slds-m-left_x-small"></lightning-button>
+      </form>
+      <template if:true={isSubmitted}>
+        <div class={isScoredFull}>
+          <p class="slds-text-heading_large slds-grid slds-align_absolute-center slds-text-align_center">
+            {scoredMessage}
+          </p>
+        </div>
+      </template>
+    </div>
+  </lightning-card>
+</template>
